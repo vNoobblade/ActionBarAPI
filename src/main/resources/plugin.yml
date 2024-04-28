@@ -1,0 +1,3 @@
+name: ActionBarAPI
+version: '${project.version}'
+main: net.noobblade.actionbarapi.ActionBarAPI
