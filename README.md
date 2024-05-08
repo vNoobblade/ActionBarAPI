@@ -11,7 +11,7 @@ actionBar.sendToAll; //send to all online players
 ```
 ## Tested Versions
 
-* 1.8
+* 1.8 <br>
 If you test it in other versions make a pull request.
 
 ## Authors
