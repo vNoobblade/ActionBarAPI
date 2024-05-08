@@ -6,21 +6,31 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutChat;
 import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-public class ActionBar {
-    private PacketPlayOutChat packet;
+import org.bukkit.ChatColor;
 
-    public ActionBar(String text) {
-        PacketPlayOutChat packet = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + text + "\"}"), (byte) 2);
-        this.packet = packet;
+public class ActionBar {
+
+    private final PacketPlayOutChat packet;
+    private final int durationTicks; // Duration in ticks (20 ticks = 1 second)
+
+    public ActionBar(String text, int durationSeconds) {
+        this.packet = new PacketPlayOutChat(ChatSerializer.a("{\"text\":\"" + text + "\"}"), (byte) 2);
+        this.durationTicks = (durationSeconds == -1) ? -1 : durationSeconds * 20; // convert seconds to ticks if duration is -1 it will last forever
     }
 
     public void sendToPlayer(Player p) {
-        ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+        if (p.isOnline()) { // player could be offline
+            ((CraftPlayer) p).getHandle().playerConnection.sendPacket(packet);
+        }
     }
 
     public void sendToAll() {
         for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-            ((CraftPlayer)p).getHandle().playerConnection.sendPacket(packet);
+            sendToPlayer(p);
         }
+    }
+
+    public int getDurationTicks() {
+        return durationTicks;
     }
 }
