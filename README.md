@@ -2,6 +2,24 @@
 
 ActionBarAPI for 1.8.X (Very Lightweight)
 
+## Maven
+```xml
+<repositories>
+	<repository>
+		<id>jitpack.io</id>
+		<url>https://jitpack.io</url>
+	</repository>
+</repositories>
+```
+
+```xml
+<dependency>
+	<groupId>com.github.vNoobblade</groupId>
+	<artifactId>ActionBarAPI</artifactId>
+	<version>Tag</version>
+</dependency>
+```
+
 ## Usage/Examples
 
 ```java
